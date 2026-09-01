@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  body {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .font-heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .liquid-glass-strong {
+    background: rgba(255, 255, 255, 0.02);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .liquid-glass-strong::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.2) 80%,
+      rgba(255, 255, 255, 0.5) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .liquid-glass-card {
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .liquid-glass-card:hover {
+    border-color: rgba(0, 229, 255, 0.35);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 229, 255, 0.12);
+  }
+
+  .liquid-pill {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    transition: all 0.25s ease;
+  }
+
+  .liquid-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Rotating Earth in Motion animations (Prompt §4) */
+@keyframes earth-spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes earth-glow-pulse {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 50px rgba(0, 229, 255, 0.4)) drop-shadow(0 0 90px rgba(0, 143, 211, 0.25));
+  }
+  50% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 70px rgba(0, 229, 255, 0.6)) drop-shadow(0 0 120px rgba(0, 143, 211, 0.4));
+  }
+}
+
+.animate-earth-spin {
+  animation: earth-spin-slow 75s linear infinite;
+}
+
+.animate-earth-glow {
+  animation: earth-glow-pulse 6s ease-in-out infinite;
+}
+
+/* Atmospheric Corona Rim */
+.earth-corona-rim {
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.3) 0%, rgba(0, 143, 211, 0.15) 50%, transparent 75%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* Video fade gradients for seamless blending into #000 */
+.video-fade-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #000000 0%, transparent 200px, transparent calc(100% - 200px), #000000 100%);
+}
+
+.video-fade-top {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background: linear-gradient(to bottom, #000000 0%, transparent 100%);
+}
+
+.video-fade-bottom {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background: linear-gradient(to top, #000000 0%, transparent 100%);
+}
+
+/* Subtle glowing light orbs */
+.glow-cyan-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.12) 0%, rgba(56, 189, 248, 0.04) 50%, transparent 80%);
+  filter: blur(60px);
+}
+
+/* Hover Pause for Orbit and Marquee */
+.pause-on-hover:hover .orbit-ring-track {
+  animation-play-state: paused !important;
+}
+
+.pause-on-hover:hover .orbit-counter-chip {
+  animation-play-state: paused !important;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f23;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
